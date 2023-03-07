@@ -6,8 +6,8 @@ const PORT = process.env.PORT || 5000;
 const connectDB = require("./db/connect");
 const errorHandlerMiddleWare = require("./middleware/errorHandler");
 const notFound = require("./middleware/notFound");
-const getAllUser = require("./routes/usersTest");
-const getAllUsersStatic = require("./routes/usersTest");
+const usersTest = require("./routes/usersTest");
+// const getAllUsersStatic = require("./routes/usersTest");
 const helmet = require("helmet");
 const cors = require("cors");
 const xss = require("xss-clean");
@@ -25,8 +25,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("all is well");
 });
-app.use("api/v1/", getAllUser);
-app.use("api/v1/", getAllUsersStatic);
+app.use("/api/v1/", usersTest);
 
 // error handling
 app.use(errorHandlerMiddleWare);
