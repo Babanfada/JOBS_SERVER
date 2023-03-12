@@ -5,9 +5,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const connectDB = require("./db/connect");
 const errorHandlerMiddleWare = require("./middleware/errorHandler");
+const authMiddleware = require("./middleware/auth");
+
 const notFound = require("./middleware/notFound");
-const usersTest = require("./routes/usersTest");
-// const getAllUsersStatic = require("./routes/usersTest");
+const usersTestRouter = require("./routes/usersTest");
+const authRouter = require("./routes/auth");
+const jobsRouter = require("./routes/jobs");
 const helmet = require("helmet");
 const cors = require("cors");
 const xss = require("xss-clean");
@@ -25,7 +28,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("all is well");
 });
-app.use("/api/v1/", usersTest);
+app.use("/api/v1/", usersTestRouter);
+app.use("/api/v1/auth/", authRouter);
+app.use("/api/v1/jobs/", authMiddleware, jobsRouter);
 
 // error handling
 app.use(errorHandlerMiddleWare);
