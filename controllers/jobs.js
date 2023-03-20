@@ -7,12 +7,15 @@ const {
   CUSTOMERROR,
 } = require("../errors");
 
-const getEveryJobs = async (req, res) => {
-  const { userId } = req.user;
-  const Job = await JOBS.find({ createdBy: req.user.userId }).sort("createdAt");
-  res.status(StatusCodes.OK).json({ Job, nbHits: Job.length });
+const allJobs = async (req, res) => {
+  console.log("jnjnisnvi");
+  const jobs = await JOBS.find({ createdBy: req.user.userId }).sort(
+    "createdAt"
+  );
+  res.status(StatusCodes.OK).json({ jobs, nbHit: jobs.length });
 };
 const getSingleJob = async (req, res) => {
+  console.log(req.user);
   const { id: JobId } = req.params;
   const { id: userId } = req.user;
   const Job = await JOBS.findById({ _id: JobId, createdBy: userId });
@@ -26,6 +29,7 @@ const createJob = async (req, res) => {
   const job = await JOBS.create({ ...req.body });
   res.status(StatusCodes.CREATED).json({ job });
 };
+
 const updateJob = async (req, res) => {
   const { id: JobId } = req.params;
   const { id: userId } = req.user;
@@ -49,11 +53,11 @@ const deleteJob = async (req, res) => {
     _id: JobId,
     createdBy: userId,
   });
-  res.status(StatusCodes.OK).send(`${JobId} suceesfully deleted`);
+  res.status(StatusCodes.OK).send(`${JobId} successfully deleted`);
 };
 
 module.exports = {
-  getEveryJobs,
+  allJobs,
   getSingleJob,
   createJob,
   updateJob,

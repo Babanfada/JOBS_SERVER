@@ -15,7 +15,7 @@ const jobsSchema = new mongoose.Schema(
       type: String,
       required: [true, "status filed is required"],
       enum: {
-        values: ["Interview", "Pending", "decline"],
+        values: ["interview", "pending", "decline"],
         message: `{VALUE} is not supported`,
       },
       default: "pending",
