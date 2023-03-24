@@ -26,7 +26,7 @@ app.use(express.json());
 
 // routes
 app.get("/", (req, res) => {
-  res.send("all is well");
+  res.send("all is well and well");
 });
 app.use("/api/v1/", usersTestRouter);
 app.use("/api/v1/auth/", authRouter);
