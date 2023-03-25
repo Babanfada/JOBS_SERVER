@@ -1,0 +1,545 @@
+{
+  "swagger": "2.0",
+
+  "info": {
+    "version": "1.0",
+
+    "title": "USERS_INFO && JOBS_API",
+
+    "description": "This API is designed to handle user authentication and CRUD (Create, Read, Update, Delete) operations. It allows users to sign up, log in and log out securely.\n\nThe API also allows CRUD operations on user data, including creating new users, updating user details such as name, email, and password, deleting users, and retrieving a list of users.\n\nIn addition to CRUD operations, the API also allows querying user information based on certain query parameters. For instance, a user's data can be retrieved based on their ID, email, or any other unique identifier. The API can also perform operations such as searching for users based on a given keyword, sorting users based on certain criteria, and filtering users based on certain attributes.\n\nOverall, this API provides a robust user authentication and management system, with powerful CRUD functionality and flexible querying options. It can be used by any application that requires secure user management functionality.",
+
+    "contact": {
+      "email": "ibn.ibrahim1992@gmail.com",
+
+      "name": "Ibrahim Muhammed Kabeer",
+
+      "url": "https://portfolio-nine-nu-96.vercel.app/"
+    }
+  },
+
+  "host": "jobs-api-users-info-api.vercel.app",
+
+  "basePath": "/api/v1",
+
+  "securityDefinitions": {},
+
+  "schemes": ["https", "http"],
+
+  "consumes": ["application/json"],
+
+  "produces": ["application/json"],
+
+  "paths": {
+    "/": {
+      "get": {
+        "description": "This route enables you to retrieve information about all the users. By default, the server responds with data for 5 users. However, you can modify the response by specifying the number of users you want to retrieve using the \"limit\" query string parameter. Please note that there are 100 users' information available in the database. In addition, the API can be queried based on various parameters such as orgName, userName, and numericFilters. The numericFilters parameter allows filtering based on account balance. Furthermore, the API also supports sorting based on any key-value pair in each document. Keep in mind that the account balance is the only available option for numeric filtering.",
+
+        "summary": "Get all users",
+
+        "tags": ["USERSINFO"],
+
+        "operationId": "Getallusers",
+
+        "deprecated": false,
+
+        "produces": ["application/json"],
+
+        "parameters": [],
+
+        "responses": {
+          "200": {
+            "description": "",
+
+            "headers": {}
+          }
+        },
+
+        "security": []
+      }
+    },
+
+    "/{id}": {
+      "get": {
+        "description": "You can retrieve information about a specific user by adding their ID to the API endpoint. This will allow you to obtain details for a single user.",
+
+        "summary": "Get Single user",
+
+        "tags": ["USERSINFO"],
+
+        "operationId": "GetSingleuser",
+
+        "deprecated": false,
+
+        "produces": ["application/json"],
+
+        "parameters": [
+          {
+            "name": "id",
+
+            "in": "path",
+
+            "required": true,
+
+            "type": "string",
+
+            "description": ""
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "",
+
+            "headers": {}
+          }
+        },
+
+        "security": []
+      }
+    },
+
+    "/auth/register": {
+      "post": {
+        "description": "This Authentication API allows users to register and login to access protected resources on a web application. Upon registration, the user's credentials are securely stored in the database, and upon successful login, the server generates a JWT (JSON Web Token) and sends it back to the user.",
+
+        "summary": "Register user",
+
+        "tags": ["AUTH"],
+
+        "operationId": "Registeruser",
+
+        "deprecated": false,
+
+        "produces": ["application/json"],
+
+        "parameters": [
+          {
+            "name": "Body",
+
+            "in": "body",
+
+            "required": true,
+
+            "description": "This are the necessary fields for user login. ensure you change this values as you will get duplication error because these valuse already exist in the database",
+
+            "schema": {
+              "example": {
+                "name": "muhammed kabeer",
+
+                "email": "email@gmail.com",
+
+                "password": "password"
+              },
+
+              "type": "object"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "",
+
+            "headers": {}
+          }
+        },
+
+        "security": []
+      }
+    },
+
+    "/auth/login": {
+      "post": {
+        "description": "This Authentication API allows users to register and login to access protected resources on a web application. Upon registration, the user's credentials are securely stored in the database, and upon successful login, the server generates a JWT (JSON Web Token) and sends it back to the user.",
+
+        "summary": "Login user",
+
+        "tags": ["AUTH"],
+
+        "operationId": "Loginuser",
+
+        "deprecated": false,
+
+        "produces": ["application/json"],
+
+        "parameters": [
+          {
+            "name": "Body",
+
+            "in": "body",
+
+            "required": true,
+
+            "description": "",
+
+            "schema": {
+              "example": {
+                "email": "email@gmail.com",
+
+                "password": "password"
+              },
+
+              "type": "object"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "",
+
+            "headers": {}
+          }
+        },
+
+        "security": []
+      }
+    },
+
+    "/jobs": {
+      "post": {
+        "description": "This route allows authenticated users to perform CRUD (Create, Read, Update, Delete) operations on a database. Upon successful authentication, users can use this endpoint to create new entries in the database, retrieve existing data, update or modify existing entries, and delete unwanted data. The endpoint provides a flexible and powerful interface for interacting with the database securely, ensuring that only authorized users have access to the data.",
+
+        "summary": "Create job",
+
+        "tags": ["JOBS"],
+
+        "operationId": "Createjob",
+
+        "deprecated": false,
+
+        "produces": ["application/json"],
+
+        "parameters": [
+          {
+            "name": "Authorization",
+
+            "in": "header",
+
+            "required": false,
+
+            "default": "Bearer {token}",
+
+            "type": "string"
+          },
+
+          {
+            "name": "Body",
+
+            "in": "body",
+
+            "required": true,
+
+            "description": "",
+
+            "schema": {
+              "example": {
+                "company": "flutterwave",
+
+                "position": "intern"
+              },
+
+              "type": "object"
+            }
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "",
+
+            "headers": {}
+          }
+        }
+      }
+    },
+
+    "/jobs/all": {
+      "get": {
+        "description": "This API endpoint allows authenticated users to perform CRUD (Create, Read, Update, Delete) operations on a database. Upon successful authentication, users can use this endpoint to create new entries in the database, retrieve existing data, update or modify existing entries, and delete unwanted data. The endpoint provides a flexible and powerful interface for interacting with the database securely, ensuring that only authorized users have access to the data.",
+
+        "summary": "Get all user jobs",
+
+        "tags": ["JOBS"],
+
+        "operationId": "Getalluserjobs",
+
+        "deprecated": false,
+
+        "produces": ["application/json"],
+
+        "parameters": [
+          {
+            "name": "Authorization",
+
+            "in": "header",
+
+            "required": false,
+
+            "default": "Bearer {token}",
+
+            "type": "string"
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "",
+
+            "headers": {}
+          }
+        }
+      }
+    },
+
+    "/jobs/{id}": {
+      "get": {
+        "description": "This API endpoint allows authenticated users to perform CRUD (Create, Read, Update, Delete) operations on a database. Upon successful authentication, users can use this endpoint to create new entries in the database, retrieve existing data, update or modify existing entries, and delete unwanted data. The endpoint provides a flexible and powerful interface for interacting with the database securely, ensuring that only authorized users have access to the data.",
+
+        "summary": "Get single jobs",
+
+        "tags": ["JOBS"],
+
+        "operationId": "Getsinglejobs",
+
+        "deprecated": false,
+
+        "produces": ["application/json"],
+
+        "parameters": [
+          {
+            "name": "Authorization",
+
+            "in": "header",
+
+            "required": false,
+
+            "default": "Bearer {token}",
+
+            "type": "string"
+          },
+
+          {
+            "name": "id",
+
+            "in": "path",
+
+            "required": true,
+
+            "type": "string",
+
+            "description": ""
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "",
+
+            "headers": {}
+          }
+        }
+      },
+
+      "patch": {
+        "description": "This API endpoint allows authenticated users to perform CRUD (Create, Read, Update, Delete) operations on a database. Upon successful authentication, users can use this endpoint to create new entries in the database, retrieve existing data, update or modify existing entries, and delete unwanted data. The endpoint provides a flexible and powerful interface for interacting with the database securely, ensuring that only authorized users have access to the data.",
+
+        "summary": "Update job",
+
+        "tags": ["JOBS"],
+
+        "operationId": "Updatejob",
+
+        "deprecated": false,
+
+        "produces": ["application/json"],
+
+        "parameters": [
+          {
+            "name": "Authorization",
+
+            "in": "header",
+
+            "required": false,
+
+            "default": "Bearer {token}",
+
+            "type": "string"
+          },
+
+          {
+            "name": "Body",
+
+            "in": "body",
+
+            "required": true,
+
+            "description": "This are the necessary fields for user login. ensure you change this values as you will get duplication error because these valuse already exist in the database",
+
+            "schema": {
+              "example": {
+                "company": "whatsapp",
+
+                "position": "senior dev"
+              },
+
+              "type": "object"
+            }
+          },
+
+          {
+            "name": "id",
+
+            "in": "path",
+
+            "required": true,
+
+            "type": "string",
+
+            "description": ""
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "",
+
+            "headers": {}
+          }
+        }
+      },
+
+      "delete": {
+        "description": "This API endpoint allows authenticated users to perform CRUD (Create, Read, Update, Delete) operations on a database. Upon successful authentication, users can use this endpoint to create new entries in the database, retrieve existing data, update or modify existing entries, and delete unwanted data. The endpoint provides a flexible and powerful interface for interacting with the database securely, ensuring that only authorized users have access to the data.",
+
+        "summary": "Delete job",
+
+        "tags": ["JOBS"],
+
+        "operationId": "Deletejob",
+
+        "deprecated": false,
+
+        "produces": ["application/json"],
+
+        "parameters": [
+          {
+            "name": "Authorization",
+
+            "in": "header",
+
+            "required": false,
+
+            "default": "Bearer {token}",
+
+            "type": "string"
+          },
+
+          {
+            "name": "id",
+
+            "in": "path",
+
+            "required": true,
+
+            "type": "string",
+
+            "description": ""
+          }
+        ],
+
+        "responses": {
+          "200": {
+            "description": "",
+
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "LOGINREQUEST": {
+      "title": "LOGINREQUEST",
+
+      "example": {
+        "name": "muhammed kabeer",
+
+        "email": "email@gmail.com",
+
+        "password": "password"
+      },
+
+      "type": "object",
+
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+
+        "email": {
+          "type": "string"
+        },
+
+        "password": {
+          "type": "string"
+        }
+      },
+
+      "required": ["name", "email", "password"]
+    },
+
+    "NewRequestRequest": {
+      "title": "NewRequestRequest",
+
+      "example": {
+        "company": "flutterwave",
+
+        "position": "helper"
+      },
+
+      "type": "object",
+
+      "properties": {
+        "company": {
+          "type": "string"
+        },
+
+        "position": {
+          "type": "string"
+        }
+      },
+
+      "required": ["company", "position"]
+    }
+  },
+
+  "security": [],
+
+  "tags": [
+    {
+      "name": "Misc",
+
+      "description": ""
+    },
+
+    {
+      "name": "USERSINFO",
+
+      "description": ""
+    },
+
+    {
+      "name": "AUTH",
+
+      "description": ""
+    },
+
+    {
+      "name": "JOBS",
+
+      "description": ""
+    }
+  ]
+}
